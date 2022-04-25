@@ -2,6 +2,7 @@ package com.nims.settings.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nims.settings.R
@@ -35,16 +37,20 @@ fun MarketingSettingItem(
             options.forEachIndexed { index, option ->
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
                         // Outside of accessibility services, this improves the usability of the
                         // component for all users of our app - as the row can be clicked as a complete item,
                         // rather than relying on individual component interactions.
-                        .clickable(onClickLabel = option) {
-                            val marketingOption =
-                                if (index == MarketingOption.ALLOWED.id) MarketingOption.ALLOWED
-                                else MarketingOption.NOT_ALLOWED
-                            onOptionSelected(marketingOption)
-                        }
+                        .selectable(
+                            selected = selectedOption.id == index,
+                            role = Role.RadioButton,
+                            onClick = {
+                                val marketingOption =
+                                    if (index == MarketingOption.ALLOWED.id) MarketingOption.ALLOWED
+                                    else MarketingOption.NOT_ALLOWED
+                                onOptionSelected(marketingOption)
+                            }
+                        )
+                        .fillMaxWidth()
                         .padding(10.dp)
                 ) {
                     RadioButton(
@@ -54,6 +60,7 @@ fun MarketingSettingItem(
                         // it would be worth thinking about having the ID represented by something
                         // that didn’t rely on the index of a list.
                         selected = selectedOption.id == index,
+                        // listener moved to row
                         onClick = null
                     )
                     Text(

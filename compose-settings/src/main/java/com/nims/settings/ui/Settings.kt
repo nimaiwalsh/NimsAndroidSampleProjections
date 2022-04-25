@@ -16,6 +16,7 @@ import com.nims.settings.R
 import com.nims.settings.SettingsViewModel
 import com.nims.settings.model.MarketingOption
 import com.nims.settings.model.SettingsState
+import com.nims.settings.model.Theme
 import com.nims.settings.ui.theme.MaterialSettingsTheme
 
 /** Entry point to Settings page, no arguments supplied. */
@@ -30,7 +31,8 @@ fun Settings() {
             state = state,
             onToggleNotificationSetting = viewModel::toggleNotificationSettings,
             onShowHintsToggled = viewModel::toggleHintSettings,
-            setMarketingOption = viewModel::setMarketingSettings
+            setMarketingOption = viewModel::setMarketingSettings,
+            setTheme = viewModel::setTheme
         )
     }
 }
@@ -53,6 +55,7 @@ fun SettingsList(
     onToggleNotificationSetting: () -> Unit,
     onShowHintsToggled: () -> Unit,
     setMarketingOption: (option: MarketingOption) -> Unit,
+    setTheme: (theme: Theme) -> Unit,
 ) {
     // When passing in a Modifier via the composable function,
     // this should always be applied at the highest point within our composable - the parent
@@ -66,14 +69,14 @@ fun SettingsList(
             modifier = Modifier.fillMaxWidth(),
             title = stringResource(id = R.string.setting_enable_notifications),
             checked = state.notificationsEnabled,
-            onToggleNotificationSettings = { onToggleNotificationSetting() }
+            onToggleNotificationSettings = onToggleNotificationSetting
         )
         Divider()
         HintSettingsItem(
             modifier = Modifier.fillMaxWidth(),
             title = stringResource(id = R.string.setting_show_hints),
             checked = state.hintsEnabled,
-            onShowHintsToggled = { onShowHintsToggled() }
+            onShowHintsToggled = onShowHintsToggled
         )
         Divider()
         ManageSubscriptionSettingItem(
@@ -90,6 +93,13 @@ fun SettingsList(
             selectedOption = state.marketingOption,
             onOptionSelected = setMarketingOption
         )
+        Divider()
+        ThemeSettingItem(
+            modifier = Modifier.fillMaxWidth(),
+            selectedTheme = state.themeOption,
+            onOptionSelected = setTheme
+        )
+        SectionSpacer(modifier = Modifier.fillMaxWidth())
     }
 }
 
@@ -103,6 +113,7 @@ fun Preview_SettingsList() {
             onToggleNotificationSetting = {},
             onShowHintsToggled = {},
             setMarketingOption = {},
+            setTheme = {}
         )
     }
 }

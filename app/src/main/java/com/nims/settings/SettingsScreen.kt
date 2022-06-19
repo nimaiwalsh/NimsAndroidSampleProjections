@@ -1,4 +1,4 @@
-package com.nims.settings.ui
+package com.nims.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,15 +13,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nims.R
-import com.nims.settings.SettingsViewModel
 import com.nims.settings.model.MarketingOption
 import com.nims.settings.model.SettingsState
 import com.nims.settings.model.Theme
+import com.nims.settings.ui.*
 import com.nims.ui.theme.MaterialSettingsTheme
 
 /** Entry point to Settings page, no arguments supplied. */
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+    popBackstack: () -> Unit
+) {
     val viewModel: SettingsViewModel = viewModel()
     // Wrapping your composable hierarchy in a theme allows all components to be consistently styled.
     MaterialSettingsTheme {
@@ -32,7 +34,8 @@ fun SettingsScreen() {
             onToggleNotificationSetting = viewModel::toggleNotificationSettings,
             onShowHintsToggled = viewModel::toggleHintSettings,
             setMarketingOption = viewModel::setMarketingSettings,
-            setTheme = viewModel::setTheme
+            setTheme = viewModel::setTheme,
+            popBackstack = popBackstack
         )
     }
 }
@@ -56,6 +59,7 @@ fun SettingsList(
     onShowHintsToggled: () -> Unit,
     setMarketingOption: (option: MarketingOption) -> Unit,
     setTheme: (theme: Theme) -> Unit,
+    popBackstack: () -> Unit,
 ) {
     // When passing in a Modifier via the composable function,
     // this should always be applied at the highest point within our composable - the parent
@@ -64,7 +68,7 @@ fun SettingsList(
             rememberScrollState()
         )
     ) {
-        TopAppBar()
+        TopAppBar(popBackstack = popBackstack)
         NotificationSettingItem(
             modifier = Modifier.fillMaxWidth(),
             title = stringResource(id = R.string.setting_enable_notifications),
@@ -113,7 +117,8 @@ fun Preview_SettingsList() {
             onToggleNotificationSetting = {},
             onShowHintsToggled = {},
             setMarketingOption = {},
-            setTheme = {}
+            setTheme = {},
+            popBackstack = {},
         )
     }
 }

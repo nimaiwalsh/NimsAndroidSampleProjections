@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.nims.settings.ui.SettingsScreen
+import com.nims.settings.SettingsScreen
 import com.nims.ui.theme.MaterialSettingsTheme
 
 @Composable
@@ -23,6 +23,10 @@ fun MainApp() {
                 navController.navigate(route) {
                     launchSingleTop = true
                 }
+            }
+
+            fun popBackstack() {
+                navController.popBackStack()
             }
 
             Scaffold(
@@ -49,7 +53,9 @@ fun MainApp() {
                     }
 
                     composable(Screens.SETTINGS_SCREEN) {
-                        SettingsScreen()
+                        SettingsScreen(
+                            popBackstack = { popBackstack() }
+                        )
                     }
                 }
             }

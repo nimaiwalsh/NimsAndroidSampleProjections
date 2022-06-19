@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NimsAndroidSampleProjects"
-include ':compose-settings'
+include ':app'

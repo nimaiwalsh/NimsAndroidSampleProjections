@@ -1,4 +1,4 @@
-package com.nims.`compose-settings`
+package com.nims.settings
 
 import org.junit.Test
 

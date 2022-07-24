@@ -1,4 +1,5 @@
 <resources>
+    <!-- Settings screen-->
     <string name="app_name">Android samples</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
@@ -20,4 +21,6 @@
     <string name="setting_option_marketing">Receive marketing emails?</string>
     <string name="setting_option_theme">Theme</string>
     <string name="cd_select_theme">Select theme</string>
+    <string name="setting_app_version_title">App version</string>
+    <string name="setting_app_version">v1.1.0</string>
 </resources>

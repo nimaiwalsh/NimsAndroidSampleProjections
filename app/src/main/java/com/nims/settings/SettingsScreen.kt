@@ -35,7 +35,8 @@ fun SettingsScreen(
             onShowHintsToggled = viewModel::toggleHintSettings,
             setMarketingOption = viewModel::setMarketingSettings,
             setTheme = viewModel::setTheme,
-            popBackstack = popBackstack
+            popBackstack = popBackstack,
+            appVersion = stringResource(id = R.string.setting_app_version)
         )
     }
 }
@@ -60,6 +61,7 @@ fun SettingsList(
     setMarketingOption: (option: MarketingOption) -> Unit,
     setTheme: (theme: Theme) -> Unit,
     popBackstack: () -> Unit,
+    appVersion: String,
 ) {
     // When passing in a Modifier via the composable function,
     // this should always be applied at the highest point within our composable - the parent
@@ -104,6 +106,8 @@ fun SettingsList(
             onOptionSelected = setTheme
         )
         SectionSpacer(modifier = Modifier.fillMaxWidth())
+        AppVersionSettingItem(modifier = Modifier.fillMaxWidth(), appVersion = appVersion)
+        Divider()
     }
 }
 
@@ -119,6 +123,7 @@ fun Preview_SettingsList() {
             setMarketingOption = {},
             setTheme = {},
             popBackstack = {},
+            appVersion = "1.0.0"
         )
     }
 }

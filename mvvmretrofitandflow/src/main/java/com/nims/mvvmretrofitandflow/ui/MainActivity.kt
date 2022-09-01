@@ -1,12 +1,13 @@
 package com.nims.mvvmretrofitandflow.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.nims.mvvmretrofitandflow.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.nims.mvvmretrofitandflow.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -14,10 +15,17 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+    lateinit var movieAdapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        movieAdapter = MainAdapter()
+        binding.movieList.layoutManager = LinearLayoutManager(this)
+        binding.movieList.adapter = movieAdapter
         observeUiState()
     }
 
@@ -25,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
-                    it.movies
+                    movieAdapter.submitList(it.movies)
                 }
             }
         }

@@ -45,7 +45,6 @@ fun MainApp() {
                     startDestination = Screens.MAIN_SCREEN,
                     modifier = Modifier.padding(innerPaddingModifier)
                 ) {
-
                     composable(Screens.MAIN_SCREEN) {
                         MainScreen(
                             openSettingsScreen = { route -> navigate(route) }

@@ -36,6 +36,7 @@ class MainAdapter : ListAdapter<Movie, MainAdapter.MovieViewHolder>(MovieDiffCal
             binding.apply {
                 tvTitle.text = movie.title
                 tvTitle.text = movie.title
+                // todo move into strings file
                 rvYear.text = "Year : ${movie.year}"
                 rvRating.text = "Rating : ${movie.imDbRating}"
                 movieCard.setOnClickListener {

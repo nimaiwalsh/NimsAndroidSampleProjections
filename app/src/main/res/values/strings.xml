@@ -23,4 +23,10 @@
     <string name="cd_select_theme">Select theme</string>
     <string name="setting_app_version_title">App version</string>
     <string name="setting_app_version">v1.1.0</string>
+
+    <!-- Authentication Screen -->
+    <string name="password_requirement_characters">At least 8 characters</string>
+    <string name="password_requirement_capital">At least 1 upper-case letter</string>
+    <string name="password_requirement_digit">At least 1 digit</string>
+
 </resources>

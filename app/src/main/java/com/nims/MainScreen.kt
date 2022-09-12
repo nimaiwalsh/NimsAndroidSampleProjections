@@ -16,7 +16,7 @@ fun MainScreen(
 ) {
     MaterialSettingsTheme {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = modifier.padding(16.dp)
         ) {
             Button(onClick = { openSettingsScreen(Screens.SETTINGS_SCREEN) }) {
                 Text(text = "Settings screen")

@@ -1,6 +1,7 @@
 package com.nims.mvvmretrofitandflow.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -33,10 +34,8 @@ class MainActivity : AppCompatActivity() {
             val searchView = searchItem?.actionView as SearchView
 
             // Configure the search info and add any event listeners...
-            searchView.isSubmitButtonEnabled = true
-            searchView.setIconifiedByDefault(true)
+            searchItem.setOnActionExpandListener(SearchExpandListener)
             searchView.setOnQueryTextListener(SearchTextListener)
-            searchView.setOnCloseListener(SearchOnCloseListener)
         }
 
         movieAdapter = MainAdapter()
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-   object SearchTextListener : SearchView.OnQueryTextListener {
+    object SearchTextListener : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             println("Query submitted: $query")
             return true
@@ -66,10 +65,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    object SearchOnCloseListener : SearchView.OnCloseListener {
-        override fun onClose(): Boolean {
+    object SearchExpandListener : MenuItem.OnActionExpandListener {
+        override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+            return true
+        }
+
+        override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
             println("Query cleared")
-            return false
+            return true
         }
     }
 }

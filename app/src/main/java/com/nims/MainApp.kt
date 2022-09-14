@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.nims.authenticationform.AuthenticationScreen
 import com.nims.settings.SettingsScreen
 import com.nims.ui.theme.MaterialSettingsTheme
 
@@ -47,14 +48,21 @@ fun MainApp() {
                 ) {
                     composable(Screens.MAIN_SCREEN) {
                         MainScreen(
-                            openSettingsScreen = { route -> navigate(route) }
+                            openSettingsScreen = { route -> navigate(route) },
+                            openAuthenticationScreen = { route -> navigate(route) }
                         )
                     }
 
+                    /** Screen showcasing a composable settings screen */
                     composable(Screens.SETTINGS_SCREEN) {
                         SettingsScreen(
                             popBackstack = { popBackstack() }
                         )
+                    }
+
+                    /** Screen showcasing a composable log-in/sign-up form screen */
+                    composable(Screens.AUTHENTICATION_SCREEN) {
+                        AuthenticationScreen()
                     }
                 }
             }
@@ -65,4 +73,5 @@ fun MainApp() {
 object Screens {
     const val MAIN_SCREEN = "MAIN_SCREEN"
     const val SETTINGS_SCREEN = "SETTINGS_SCREEN"
+    const val AUTHENTICATION_SCREEN = "AUTHENTICATION_SCREEN"
 }

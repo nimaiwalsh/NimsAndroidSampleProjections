@@ -12,6 +12,7 @@ import com.nims.ui.theme.MaterialSettingsTheme
 @Composable
 fun MainScreen(
     openSettingsScreen: (route: String) -> Unit,
+    openAuthenticationScreen: (route: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     MaterialSettingsTheme {
@@ -20,6 +21,9 @@ fun MainScreen(
         ) {
             Button(onClick = { openSettingsScreen(Screens.SETTINGS_SCREEN) }) {
                 Text(text = "Settings screen")
+            }
+            Button(onClick = { openAuthenticationScreen(Screens.AUTHENTICATION_SCREEN) }) {
+                Text(text = "Authentication screen")
             }
         }
     }

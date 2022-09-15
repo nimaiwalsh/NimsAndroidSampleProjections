@@ -28,9 +28,10 @@ fun AuthenticationContent(
             AuthenticationForm(
                 authenticationMode = authenticationState.authenticationMode,
                 email = authenticationState.email,
-                onEmailChanged = { handleEvent(AuthenticationEvent.EmailChanged(it)) },
                 password = authenticationState.password,
-                onPasswordChanged = { handleEvent(AuthenticationEvent.PasswordChanged(it)) }
+                onEmailChanged = { handleEvent(AuthenticationEvent.EmailChanged(it)) },
+                onPasswordChanged = { handleEvent(AuthenticationEvent.PasswordChanged(it)) },
+                onAuthenticate = { handleEvent(AuthenticationEvent.Authentication) },
             )
         }
     }

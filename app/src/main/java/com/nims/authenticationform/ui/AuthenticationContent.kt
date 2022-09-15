@@ -29,6 +29,7 @@ fun AuthenticationContent(
                 authenticationMode = authenticationState.authenticationMode,
                 email = authenticationState.email,
                 password = authenticationState.password,
+                completedPasswordRequirements = authenticationState.passwordRequirements,
                 onEmailChanged = { handleEvent(AuthenticationEvent.EmailChanged(it)) },
                 onPasswordChanged = { handleEvent(AuthenticationEvent.PasswordChanged(it)) },
                 onAuthenticate = { handleEvent(AuthenticationEvent.Authentication) },

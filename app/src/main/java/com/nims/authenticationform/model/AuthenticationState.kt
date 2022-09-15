@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import com.nims.R
 
 data class AuthenticationState(
-    val authenticationMode: AuthenticationMode = AuthenticationMode.SIGN_IN,
+    val authenticationMode: AuthenticationMode = AuthenticationMode.SIGN_UP,
     val email: String? = null,
     val password: String? = null,
     val passwordRequirements: List<PasswordRequirements> = emptyList(),

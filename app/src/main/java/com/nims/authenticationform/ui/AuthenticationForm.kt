@@ -1,5 +1,6 @@
 package com.nims.authenticationform.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -8,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.unit.dp
 import com.nims.authenticationform.model.AuthenticationMode
+import com.nims.authenticationform.model.PasswordRequirements
 
 /** The parent container to our sign-in/sign-up form*/
 @Composable
@@ -16,6 +18,7 @@ fun AuthenticationForm(
     authenticationMode: AuthenticationMode,
     email: String?,
     password: String?,
+    completedPasswordRequirements: List<PasswordRequirements>,
     onEmailChanged: (email: String) -> Unit,
     onPasswordChanged: (password: String) -> Unit,
     onAuthenticate: () -> Unit,
@@ -52,6 +55,14 @@ fun AuthenticationForm(
                     passwordFocusRequester = passwordFocusRequester,
                     onDoneClicked = onAuthenticate
                 )
+                Spacer(modifier = Modifier.height(12.dp))
+
+                AnimatedVisibility(visible = authenticationMode == AuthenticationMode.SIGN_UP) {
+                    PasswordRequirements(
+                        modifier = Modifier.fillMaxWidth(),
+                        satisfiedRequirements = completedPasswordRequirements
+                    )
+                }
             }
         }
     }

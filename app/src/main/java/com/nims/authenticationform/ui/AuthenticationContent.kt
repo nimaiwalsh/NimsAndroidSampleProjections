@@ -27,12 +27,14 @@ fun AuthenticationContent(
         } else {
             AuthenticationForm(
                 authenticationMode = authenticationState.authenticationMode,
+                enableAuthentication = authenticationState.isFormValid(),
                 email = authenticationState.email,
                 password = authenticationState.password,
                 completedPasswordRequirements = authenticationState.passwordRequirements,
                 onEmailChanged = { handleEvent(AuthenticationEvent.EmailChanged(it)) },
                 onPasswordChanged = { handleEvent(AuthenticationEvent.PasswordChanged(it)) },
                 onAuthenticate = { handleEvent(AuthenticationEvent.Authentication) },
+                onToggleAuthenticationMode = { handleEvent(AuthenticationEvent.ToggleAuthenticationMode) }
             )
         }
     }

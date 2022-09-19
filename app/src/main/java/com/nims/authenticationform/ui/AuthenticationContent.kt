@@ -25,6 +25,7 @@ fun AuthenticationContent(
         if (authenticationState.isLoading) {
             CircularProgressIndicator()
         } else {
+            // Authentication form
             AuthenticationForm(
                 authenticationMode = authenticationState.authenticationMode,
                 enableAuthentication = authenticationState.isFormValid(),
@@ -36,6 +37,12 @@ fun AuthenticationContent(
                 onAuthenticate = { handleEvent(AuthenticationEvent.Authentication) },
                 onToggleAuthenticationMode = { handleEvent(AuthenticationEvent.ToggleAuthenticationMode) }
             )
+            // errorDialog
+            authenticationState.error?.let { error ->
+                AuthenticationErrorDialog(
+                    error = error,
+                    dismissError = { handleEvent(AuthenticationEvent.ErrorDismissed) })
+            }
         }
     }
 }

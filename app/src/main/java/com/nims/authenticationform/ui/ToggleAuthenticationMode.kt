@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nims.R
@@ -25,14 +26,16 @@ fun ToggleAuthenticationMode(
      * when this component already exists to do it for us.
      */
     Surface(modifier = modifier.padding(top = 16.dp), elevation = 8.dp) {
-        TextButton(onClick = { onToggleAuthentication() }
+        TextButton(
+            modifier = Modifier.testTag(Tags.TAG_AUTHENTICATION_TOGGLE),
+            onClick = { onToggleAuthentication() }
         ) {
             val buttonText = if (authenticationMode == AuthenticationMode.SIGN_IN) {
                 stringResource(id = R.string.action_need_account)
             } else {
                 stringResource(id = R.string.action_already_have_account)
             }
-            
+
             Text(text = buttonText)
         }
     }

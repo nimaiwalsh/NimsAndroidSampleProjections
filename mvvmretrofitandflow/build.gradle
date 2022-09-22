@@ -6,6 +6,8 @@ plugins {
 }
 
 android {
+    namespace 'com.nims.mvvmretrofitandflow'
+
     compileSdk 32
 
     defaultConfig {

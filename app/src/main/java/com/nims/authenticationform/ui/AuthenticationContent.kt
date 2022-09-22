@@ -5,8 +5,11 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.nims.authenticationform.model.AuthenticationEvent
 import com.nims.authenticationform.model.AuthenticationState
+import com.nims.authenticationform.ui.Tags.TAG_CONTENT
+import com.nims.authenticationform.ui.Tags.TAG_PROGRESS
 
 @Composable
 fun AuthenticationContent(
@@ -23,7 +26,9 @@ fun AuthenticationContent(
         contentAlignment = Alignment.Center,
     ) {
         if (authenticationState.isLoading) {
-            CircularProgressIndicator()
+            CircularProgressIndicator(
+                modifier = Modifier.testTag(TAG_PROGRESS)
+            )
         } else {
             // Authentication form
             AuthenticationForm(

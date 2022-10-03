@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nims.authenticationform.AuthenticationScreen
+import com.nims.home.HomeScreen
 import com.nims.settings.SettingsScreen
 import com.nims.ui.theme.MaterialSettingsTheme
 
@@ -48,8 +49,7 @@ fun MainApp() {
                 ) {
                     composable(Screens.MAIN_SCREEN) {
                         MainScreen(
-                            openSettingsScreen = { route -> navigate(route) },
-                            openAuthenticationScreen = { route -> navigate(route) }
+                            openScreen = { route -> navigate(route) },
                         )
                     }
 
@@ -64,6 +64,11 @@ fun MainApp() {
                     composable(Screens.AUTHENTICATION_SCREEN) {
                         AuthenticationScreen()
                     }
+
+                    /** Screen showcasing a home layout with bottom navigation */
+                    composable(Screens.HOME_SCREEN) {
+                        HomeScreen()
+                    }
                 }
             }
         }
@@ -74,4 +79,5 @@ object Screens {
     const val MAIN_SCREEN = "MAIN_SCREEN"
     const val SETTINGS_SCREEN = "SETTINGS_SCREEN"
     const val AUTHENTICATION_SCREEN = "AUTHENTICATION_SCREEN"
+    const val HOME_SCREEN = "HOME_SCREEN"
 }

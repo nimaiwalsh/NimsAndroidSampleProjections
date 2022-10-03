@@ -42,4 +42,8 @@
     <string name="action_already_have_account">Already have an account?</string>
     <string name="error_title">Whoops</string>
     <string name="error_action">Ok</string>
+
+    <!-- Home screen -->
+    <string name="cd_create_item">Create a new item</string>
+
 </resources>

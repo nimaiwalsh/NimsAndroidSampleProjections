@@ -9,13 +9,30 @@ import androidx.compose.ui.graphics.vector.ImageVector
 /** Destinations withing the Home of our app. */
 sealed class Destination(
     val path: String,
+    val title: String,
     val icon: ImageVector? = null
 ) {
-    object Home : Destination("home")
+    object Home : Destination(ROUTE_HOME, "Home")
 
-    object Feed : Destination("feed", Icons.Default.List)
+    object Feed : Destination(ROUTE_FEED, "Feed", Icons.Default.List)
 
-    object Contacts : Destination("contacts", Icons.Default.Person)
+    object Contacts : Destination(ROUTE_CONTACTS, "Contacts", Icons.Default.Person)
 
-    object Calendar : Destination("calendar", Icons.Default.DateRange)
+    object Calendar : Destination(ROUTE_CALENDAR, "Calendar", Icons.Default.DateRange)
+
+    companion object {
+        const val ROUTE_HOME = "home"
+        const val ROUTE_FEED = "feed"
+        const val ROUTE_CONTACTS = "contacts"
+        const val ROUTE_CALENDAR = "calendar"
+
+        fun fromString(route: String): Destination {
+            return when (route) {
+                Feed.path -> Feed
+                Calendar.path -> Calendar
+                Contacts.path -> Contacts
+                else -> Home
+            }
+        }
+    }
 }

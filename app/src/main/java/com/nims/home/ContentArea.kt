@@ -27,11 +27,11 @@ fun ContentArea(
             Icon(
                 modifier = Modifier.size(80.dp),
                 imageVector = icon,
-                contentDescription = destination.path
+                contentDescription = destination.title
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        Text(text = destination.path, fontSize = 18.sp)
+        Text(text = destination.title, fontSize = 18.sp)
     }
 }

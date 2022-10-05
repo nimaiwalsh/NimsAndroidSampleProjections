@@ -41,9 +41,11 @@
     <string name="action_need_account">Need an account?</string>
     <string name="action_already_have_account">Already have an account?</string>
     <string name="error_title">Whoops</string>
-    <string name="error_action">Ok</string>
+    <string name="error_action">Okay</string>
 
     <!-- Home screen -->
     <string name="cd_create_item">Create a new item</string>
+    <string name="cd_more_information">More information</string>
+    <string name="not_available_yet">Not available yet</string>
 
 </resources>

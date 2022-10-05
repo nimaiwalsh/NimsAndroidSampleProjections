@@ -5,25 +5,31 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nims.R
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
 
+    val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val navBackStackEntry = navController.currentBackStackEntryAsState()
@@ -46,9 +52,27 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(title = {
-                Text(text = "Home")
-            })
+            val snackbarMessage = stringResource(id = R.string.not_available_yet)
+
+            TopAppBar(
+                title = {
+                    Text(text = "Home")
+                },
+                actions = {
+                    if (currentDestination !== Destination.Feed) {
+                        IconButton(onClick = {
+                            coroutineScope.launch {
+                                scaffoldState.snackbarHostState.showSnackbar(snackbarMessage)
+                            }
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = stringResource(id = R.string.cd_more_information)
+                            )
+                        }
+                    }
+                }
+            )
         },
         bottomBar = {
             BottomNavigationBar(
@@ -63,6 +87,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                         // this avoids duplicate copies existing in our back stack should a
                         // destination be reselected.
                         launchSingleTop = true
+                        // Whether this navigation action should restore any state previously
+                        // saved by PopUpToBuilder. This means if a previously selected item is
+                        // reselected, its state will be restored.
+                        restoreState = true
                     }
                 }
             )

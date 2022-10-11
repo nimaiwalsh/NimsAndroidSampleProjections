@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.nims.home.model.Destination
 
 @Composable
 fun ContentArea(
@@ -23,6 +24,7 @@ fun ContentArea(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         destination.icon?.let { icon ->
             Icon(
                 modifier = Modifier.size(80.dp),
@@ -32,6 +34,6 @@ fun ContentArea(
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        Text(text = destination.title, fontSize = 18.sp)
+        Text(text = destination.path, fontSize = 18.sp)
     }
 }

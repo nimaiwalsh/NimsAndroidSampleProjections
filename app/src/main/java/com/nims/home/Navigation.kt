@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.nims.home.model.Destination
 
 @Composable
 fun Navigation(
@@ -18,7 +19,7 @@ fun Navigation(
         navController = navController,
         startDestination = Destination.Home.path
     ) {
-        // Nested NavGraph
+        // Nested NavGraph: Root Destinations used for Bottom Navigation
         navigation(
             // start destination of the nested nav graph
             startDestination = Destination.Feed.path,
@@ -42,6 +43,16 @@ fun Navigation(
                     modifier = Modifier.fillMaxSize(),
                     destination = Destination.Calendar
                 )
+            }
+        }
+
+        // Nested NavGraph: Features
+        navigation(
+            startDestination = Destination.Add.path,
+            route = Destination.Creation.path
+        ) {
+            composable(route = Destination.Add.path) {
+                ContentArea(modifier = Modifier.fillMaxSize(), Destination.Add)
             }
         }
 

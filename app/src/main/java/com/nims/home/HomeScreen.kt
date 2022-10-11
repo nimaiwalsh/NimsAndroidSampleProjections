@@ -1,18 +1,14 @@
 package com.nims.home
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.DrawerValue
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -24,6 +20,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nims.R
+import com.nims.home.model.Destination
 import kotlinx.coroutines.launch
 
 @Composable
@@ -31,7 +28,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
-    val scaffoldState = rememberScaffoldState()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scaffoldState = rememberScaffoldState(drawerState = drawerState)
     val navBackStackEntry = navController.currentBackStackEntryAsState()
 
     /**
@@ -52,56 +50,58 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
-            val snackbarMessage = stringResource(id = R.string.not_available_yet)
-
-            TopAppBar(
-                title = {
-                    Text(text = "Home")
-                },
-                actions = {
-                    if (currentDestination !== Destination.Feed) {
-                        IconButton(onClick = {
-                            coroutineScope.launch {
-                                scaffoldState.snackbarHostState.showSnackbar(snackbarMessage)
-                            }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Default.Info,
-                                contentDescription = stringResource(id = R.string.cd_more_information)
-                            )
-                        }
+            DestinationTopToolbar(
+                modifier = Modifier.fillMaxWidth(),
+                currentDestination = currentDestination,
+                onNavigateUp = { navController.popBackStack() },
+                onOpenDrawer = { coroutineScope.launch { drawerState.open() } },
+                showSnackbar = { message ->
+                    coroutineScope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar(message)
                     }
                 }
             )
         },
         bottomBar = {
-            BottomNavigationBar(
-                currentDestination = currentDestination,
-                onNavigate = {
-                    navController.navigate(it.path) {
-                        // clear all backstack entries as bottom nav is a root destination
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+            if (currentDestination.isRootDestination) {
+                BottomNavigationBar(
+                    currentDestination = currentDestination,
+                    onNavigate = {
+                        navController.navigate(it.path) {
+                            // clear all backstack entries as bottom nav is a root destination
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            // This means that each destination can only have one back stack entry,
+                            // this avoids duplicate copies existing in our back stack should a
+                            // destination be reselected.
+                            launchSingleTop = true
+                            // Whether this navigation action should restore any state previously
+                            // saved by PopUpToBuilder. This means if a previously selected item is
+                            // reselected, its state will be restored.
+                            restoreState = true
                         }
-                        // This means that each destination can only have one back stack entry,
-                        // this avoids duplicate copies existing in our back stack should a
-                        // destination be reselected.
-                        launchSingleTop = true
-                        // Whether this navigation action should restore any state previously
-                        // saved by PopUpToBuilder. This means if a previously selected item is
-                        // reselected, its state will be restored.
-                        restoreState = true
                     }
-                }
-            )
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.cd_create_item)
                 )
             }
+        },
+        floatingActionButton = {
+            if (currentDestination == Destination.Feed) {
+                FloatingActionButton(onClick = { navController.navigate(Destination.Creation.path) }) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = stringResource(id = R.string.cd_create_item)
+                    )
+                }
+            }
+        },
+        drawerContent = {
+            DrawerContent(
+                onNavigationSelected = { destination ->
+                    navController.navigate(destination.path)
+                    coroutineScope.launch { drawerState.close() }
+                },
+                onLogout = {})
         }
     ) { padding ->
         // Main content of your screen goes here
@@ -109,33 +109,5 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             modifier = modifier.padding(padding),
             navController = navController
         )
-    }
-}
-
-@Composable
-fun BottomNavigationBar(
-    modifier: Modifier = Modifier,
-    currentDestination: Destination,
-    onNavigate: (destination: Destination) -> Unit
-) {
-    BottomNavigation(modifier = modifier) {
-        listOf(
-            Destination.Feed,
-            Destination.Contacts,
-            Destination.Calendar
-        ).forEach {
-            BottomNavigationItem(
-                selected = currentDestination.path == it.path,
-                icon = {
-                    it.icon?.let { image ->
-                        Icon(imageVector = image, contentDescription = it.path)
-                    }
-                },
-                onClick = { onNavigate(it) },
-                label = {
-                    Text(text = it.title)
-                }
-            )
-        }
     }
 }

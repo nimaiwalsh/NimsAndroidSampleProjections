@@ -1,5 +1,8 @@
 package com.nims.home
 
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.DrawerValue
@@ -15,8 +18,10 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.nims.R
@@ -24,7 +29,10 @@ import com.nims.home.model.Destination
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    orientation: Int = LocalConfiguration.current.orientation
+) {
 
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
@@ -63,7 +71,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             )
         },
         bottomBar = {
-            if (currentDestination.isRootDestination) {
+            if (currentDestination.isRootDestination && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 BottomNavigationBar(
                     currentDestination = currentDestination,
                     onNavigate = {
@@ -86,7 +94,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             }
         },
         floatingActionButton = {
-            if (currentDestination == Destination.Feed) {
+            if (currentDestination == Destination.Feed && orientation == Configuration.ORIENTATION_PORTRAIT) {
                 FloatingActionButton(onClick = { navController.navigate(Destination.Creation.path) }) {
                     Icon(
                         imageVector = Icons.Default.Add,
@@ -105,8 +113,46 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
     ) { padding ->
         // Main content of your screen goes here
+        Body(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            navController = navController,
+            currentDestination = currentDestination,
+            orientation = orientation,
+            onCreateItem = { navController.navigate(Destination.Add.path) },
+            onNavigate = {
+                navController.navigate(it.path) {
+                    popUpTo(Destination.Home.path) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun Body(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    currentDestination: Destination,
+    orientation: Int,
+    onCreateItem: () -> Unit,
+    onNavigate: (destination: Destination) -> Unit,
+) {
+    Row(modifier = modifier) {
+        if (currentDestination.isRootDestination && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            RailNavigationBar(
+                currentDestination = currentDestination,
+                onNavigate = onNavigate,
+                onCreateItem = onCreateItem
+            )
+        }
         Navigation(
-            modifier = modifier.padding(padding),
+            modifier = Modifier.fillMaxSize(),
             navController = navController
         )
     }

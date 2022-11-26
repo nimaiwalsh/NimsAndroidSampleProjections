@@ -54,4 +54,9 @@
     <string name="cd_open_menu">Open menu</string>
     <string name="cd_navigate_up">Go back home</string>
 
+    <!-- Email Inbox -->
+    <string name="title_inbox">Inbox (%s)</string>
+    <string name="message_content_error">Whoops, there was a problem loading the content.</string>
+    <string name="label_try_again">Try again?</string>
+
 </resources>

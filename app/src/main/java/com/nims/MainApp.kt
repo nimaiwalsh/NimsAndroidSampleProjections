@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nims.authenticationform.AuthenticationScreen
 import com.nims.home.HomeScreen
+import com.nims.inbox.InboxScreen
 import com.nims.settings.SettingsScreen
 import com.nims.ui.theme.MaterialSettingsTheme
 
@@ -69,6 +70,11 @@ fun MainApp() {
                     composable(Screens.HOME_SCREEN) {
                         HomeScreen()
                     }
+
+                    /** Screen showcasing email inbox with bottom navigation */
+                    composable(Screens.EMAIL_INBOX) {
+                        InboxScreen()
+                    }
                 }
             }
         }
@@ -80,4 +86,5 @@ object Screens {
     const val SETTINGS_SCREEN = "SETTINGS_SCREEN"
     const val AUTHENTICATION_SCREEN = "AUTHENTICATION_SCREEN"
     const val HOME_SCREEN = "HOME_SCREEN"
+    const val EMAIL_INBOX = "EMAIL_INBOX"
 }

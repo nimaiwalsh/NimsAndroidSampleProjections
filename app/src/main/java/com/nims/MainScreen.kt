@@ -27,6 +27,9 @@ fun MainScreen(
             Button(onClick = { openScreen(Screens.HOME_SCREEN) }) {
                 Text(text = "Home screen")
             }
+            Button(onClick = { openScreen(Screens.EMAIL_INBOX) }) {
+                Text(text = "Email inbox")
+            }
         }
     }
 }

@@ -56,7 +56,11 @@
 
     <!-- Email Inbox -->
     <string name="title_inbox">Inbox (%s)</string>
+    <string name="title_empty">No emails</string>
     <string name="message_content_error">Whoops, there was a problem loading the content.</string>
     <string name="label_try_again">Try again?</string>
+    <string name="message_empty_content">Nothing to show here yet.</string>
+    <string name="label_check_again">Check again</string>
+    <string name="cd_delete_email">Delete email</string>
 
 </resources>

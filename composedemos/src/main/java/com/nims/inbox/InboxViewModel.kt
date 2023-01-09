@@ -64,6 +64,11 @@ object EmailFactory {
                 "6",
                 "You didn't win this time",
                 "Thanks for entering our competition. Unfortunately you didn't win this time! Please try again soon, you might have better luck in future"
+            ),
+            Email(
+                "7",
+                "Lotto results",
+                "Thanks for entering our competition. Unfortunately you didn't win this time! Please try again soon, you might have better luck in future"
             )
         )
     }

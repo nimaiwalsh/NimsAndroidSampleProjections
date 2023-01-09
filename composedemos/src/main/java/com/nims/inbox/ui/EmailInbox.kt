@@ -28,6 +28,7 @@ fun EmailInbox(
     inboxState: InboxState,
     handleEvent: (inboxEvent: InboxEvent) -> Unit
 ) {
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -41,10 +42,18 @@ fun EmailInbox(
                         .padding(top = 8.dp),
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
-                    text = stringResource(
-                        id = R.string.title_inbox,
-                        inboxState.emails?.count() ?: 0
-                    )
+                    text = when (inboxState.status) {
+                        InboxStatus.EMPTY,
+                        InboxStatus.ERROR -> stringResource(R.string.title_empty)
+                        InboxStatus.HAS_EMAILS,
+                        InboxStatus.LOADING,
+                        -> {
+                            stringResource(
+                                id = R.string.title_inbox,
+                                inboxState.emails?.count() ?: 0
+                            )
+                        }
+                    }
                 )
             }
         }
@@ -57,9 +66,15 @@ fun EmailInbox(
 
             when (inboxState.status) {
                 InboxStatus.LOADING -> Loading()
-                InboxStatus.HAS_EMAILS -> {}
-                InboxStatus.ERROR -> ErrorState(onTryAgain = { handleEvent(InboxEvent.RefreshContent) })
-                InboxStatus.EMPTY -> {}
+                InboxStatus.HAS_EMAILS -> EmailList(
+                    emails = inboxState.emails ?: emptyList(),
+                    onDeleteEmail = { id -> handleEvent(InboxEvent.DeleteEmail(id)) })
+                InboxStatus.ERROR -> ErrorState(
+                    onTryAgain = { handleEvent(InboxEvent.RefreshContent) }
+                )
+                InboxStatus.EMPTY -> EmptyState(
+                    onRefresh = { handleEvent(InboxEvent.RefreshContent) }
+                )
             }
         }
 

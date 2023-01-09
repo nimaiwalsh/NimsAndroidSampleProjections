@@ -20,7 +20,7 @@ class InboxViewModel : ViewModel() {
     fun loadContent() {
         uiState.value = uiState.value.copy(status = InboxStatus.LOADING)
         uiState.value = uiState.value.copy(
-            status = InboxStatus.HAS_EMAILS,
+            status = InboxStatus.SUCCESS,
             emails = EmailFactory.makeEmailList()
         )
     }

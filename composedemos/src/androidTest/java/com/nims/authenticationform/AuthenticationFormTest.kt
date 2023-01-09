@@ -15,7 +15,6 @@ import com.nims.authenticationform.model.AuthenticationState
 import com.nims.authenticationform.ui.AuthenticationContent
 import com.nims.authenticationform.ui.Tags.TAG_AUTHENTICATE_BUTTON
 import com.nims.authenticationform.ui.Tags.TAG_AUTHENTICATION_TOGGLE
-import com.nims.authenticationform.ui.Tags.TAG_CONTENT
 import com.nims.authenticationform.ui.Tags.TAG_ERROR_ALERT
 import com.nims.authenticationform.ui.Tags.TAG_INPUT_EMAIL
 import com.nims.authenticationform.ui.Tags.TAG_INPUT_PASSWORD

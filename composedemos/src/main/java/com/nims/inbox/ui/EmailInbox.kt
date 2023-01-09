@@ -45,7 +45,7 @@ fun EmailInbox(
                     text = when (inboxState.status) {
                         InboxStatus.EMPTY,
                         InboxStatus.ERROR -> stringResource(R.string.title_empty)
-                        InboxStatus.HAS_EMAILS,
+                        InboxStatus.SUCCESS,
                         InboxStatus.LOADING,
                         -> {
                             stringResource(
@@ -66,13 +66,16 @@ fun EmailInbox(
 
             when (inboxState.status) {
                 InboxStatus.LOADING -> Loading()
-                InboxStatus.HAS_EMAILS -> EmailList(
+                InboxStatus.SUCCESS -> EmailList(
+                    modifier = Modifier.fillMaxSize(),
                     emails = inboxState.emails ?: emptyList(),
                     onDeleteEmail = { id -> handleEvent(InboxEvent.DeleteEmail(id)) })
                 InboxStatus.ERROR -> ErrorState(
+                    modifier = Modifier.fillMaxWidth(),
                     onTryAgain = { handleEvent(InboxEvent.RefreshContent) }
                 )
                 InboxStatus.EMPTY -> EmptyState(
+                    modifier = Modifier.fillMaxWidth(),
                     onRefresh = { handleEvent(InboxEvent.RefreshContent) }
                 )
             }

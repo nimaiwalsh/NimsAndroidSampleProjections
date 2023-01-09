@@ -12,7 +12,7 @@ data class Email(
 )
 
 enum class InboxStatus {
-    LOADING, HAS_EMAILS, ERROR, EMPTY
+    LOADING, SUCCESS, ERROR, EMPTY
 }
 
 sealed class InboxEvent {

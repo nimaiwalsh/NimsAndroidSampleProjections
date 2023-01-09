@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
-import androidx.compose.material.DismissState
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.DismissDirection
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,16 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nims.inbox.model.Email
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun EmailItem(
+fun EmailItemForeground(
     modifier: Modifier = Modifier,
     email: Email,
-    dismissState: DismissState,
+    dismissDirection: DismissDirection?,
 ) {
 
     val cardElevation = animateDpAsState(
-        targetValue = if (dismissState.dismissDirection != null) 4.dp else 0.dp
+        targetValue = if (dismissDirection != null) 4.dp else 0.dp
     ).value
 
     Card(

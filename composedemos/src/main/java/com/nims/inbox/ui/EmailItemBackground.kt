@@ -6,9 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.DismissState
 import androidx.compose.material.DismissValue
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
@@ -22,14 +20,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nims.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EmailBackground(
     modifier: Modifier = Modifier,
-    dismissState: DismissState,
+    dismissTargetValue: DismissValue,
+    dismissCurrentValue: DismissValue,
 ) {
     val backgroundColor by animateColorAsState(
-        targetValue = when (dismissState.targetValue) {
+        targetValue = when (dismissTargetValue) {
             DismissValue.DismissedToEnd -> MaterialTheme.colors.error
             else -> MaterialTheme.colors.background
         },
@@ -37,7 +35,7 @@ fun EmailBackground(
     )
 
     val iconColor by animateColorAsState(
-        targetValue = when (dismissState.targetValue) {
+        targetValue = when (dismissTargetValue) {
             DismissValue.DismissedToEnd -> MaterialTheme.colors.onError
             else -> MaterialTheme.colors.onSurface
         },
@@ -45,7 +43,7 @@ fun EmailBackground(
     )
 
     val scale by animateFloatAsState(
-        targetValue = if (dismissState.targetValue == DismissValue.DismissedToEnd) 1f else 0.75f,
+        targetValue = if (dismissTargetValue == DismissValue.DismissedToEnd) 1f else 0.75f,
         animationSpec = tween()
     )
 
@@ -55,7 +53,7 @@ fun EmailBackground(
             .padding(horizontal = 20.dp)
     ) {
         // Do not display icon when item is being dismissed
-        if (dismissState.currentValue == DismissValue.Default) {
+        if (dismissCurrentValue == DismissValue.Default) {
             Icon(
                 modifier = Modifier
                     .align(Alignment.CenterStart)

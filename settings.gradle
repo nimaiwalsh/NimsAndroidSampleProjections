@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NimsAndroidSampleProjects"
-include ':app'
+include ':composedemos'
 include ':mvvmretrofitandflow'

@@ -66,20 +66,21 @@ fun EmailList(
                 directions = setOf(DismissDirection.StartToEnd),
                 dismissThresholds = { FractionalThreshold(0.15f) },
                 dismissContent = {
-                    EmailItem(
+                    EmailItemForeground(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(emailHeightAnimation),
+                            .height(emailHeightAnimation)
+                            .fillMaxWidth(),
                         email = email,
-                        dismissState = dismissState,
+                        dismissDirection = dismissState.dismissDirection,
                     )
                 },
                 background = {
                     EmailBackground(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(emailHeightAnimation),
-                        dismissState = dismissState,
+                            .height(emailHeightAnimation)
+                            .fillMaxWidth(),
+                        dismissTargetValue = dismissState.targetValue,
+                        dismissCurrentValue = dismissState.currentValue,
                     )
                 }
             )

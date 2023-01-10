@@ -9,7 +9,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.nims.R
-import com.nims.authenticationform.ui.Tags.TAG_ERROR_ALERT
+import com.nims.Tags.AuthenticationForm.TAG_ERROR_ALERT
 
 @Composable
 fun AuthenticationErrorDialog(

@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nims.R
+import com.nims.Tags
 import com.nims.authenticationform.model.AuthenticationMode
 
 @Composable
@@ -25,9 +26,12 @@ fun ToggleAuthenticationMode(
      * This saves us from using a Box composable and applying a collection of styling ourselves
      * when this component already exists to do it for us.
      */
-    Surface(modifier = modifier.padding(top = 16.dp), elevation = 8.dp) {
+    Surface(
+        modifier = modifier.padding(top = 16.dp),
+        elevation = 8.dp
+    ) {
         TextButton(
-            modifier = Modifier.testTag(Tags.TAG_AUTHENTICATION_TOGGLE),
+            modifier = Modifier.testTag(Tags.AuthenticationForm.TAG_AUTHENTICATION_TOGGLE),
             onClick = { onToggleAuthentication() }
         ) {
             val buttonText = if (authenticationMode == AuthenticationMode.SIGN_IN) {

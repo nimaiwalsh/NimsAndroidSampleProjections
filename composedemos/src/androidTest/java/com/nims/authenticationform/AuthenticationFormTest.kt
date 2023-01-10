@@ -13,12 +13,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.nims.R
 import com.nims.authenticationform.model.AuthenticationState
 import com.nims.authenticationform.ui.AuthenticationContent
-import com.nims.authenticationform.ui.Tags.TAG_AUTHENTICATE_BUTTON
-import com.nims.authenticationform.ui.Tags.TAG_AUTHENTICATION_TOGGLE
-import com.nims.authenticationform.ui.Tags.TAG_ERROR_ALERT
-import com.nims.authenticationform.ui.Tags.TAG_INPUT_EMAIL
-import com.nims.authenticationform.ui.Tags.TAG_INPUT_PASSWORD
-import com.nims.authenticationform.ui.Tags.TAG_PROGRESS
+import com.nims.Tags.AuthenticationForm.TAG_AUTHENTICATE_BUTTON
+import com.nims.Tags.AuthenticationForm.TAG_AUTHENTICATION_TOGGLE
+import com.nims.Tags.AuthenticationForm.TAG_ERROR_ALERT
+import com.nims.Tags.AuthenticationForm.TAG_INPUT_EMAIL
+import com.nims.Tags.AuthenticationForm.TAG_INPUT_PASSWORD
+import com.nims.Tags.AuthenticationForm.TAG_PROGRESS
 import org.junit.Rule
 import org.junit.Test
 

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.nims.Tags
 import com.nims.authenticationform.model.AuthenticationMode
 import com.nims.authenticationform.model.PasswordRequirements
 
@@ -31,7 +32,7 @@ fun AuthenticationForm(
     onToggleAuthenticationMode: () -> Unit,
 ) {
     Column(
-        modifier = modifier.testTag(Tags.TAG_CONTENT),
+        modifier = modifier.testTag(Tags.AuthenticationForm.TAG_CONTENT),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(32.dp))

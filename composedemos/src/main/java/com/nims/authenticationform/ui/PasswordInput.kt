@@ -25,7 +25,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.nims.R
-import com.nims.authenticationform.ui.Tags.TAG_INPUT_PASSWORD
+import com.nims.Tags.AuthenticationForm.TAG_INPUT_PASSWORD
 
 @Composable
 fun PasswordInput(

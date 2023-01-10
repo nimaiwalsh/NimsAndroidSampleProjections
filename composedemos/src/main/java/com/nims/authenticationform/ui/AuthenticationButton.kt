@@ -17,7 +17,7 @@ fun AuthenticationButton(
     onAuthenticate: () -> Unit,
 ) {
     Button(
-        modifier = modifier.testTag(Tags.TAG_AUTHENTICATE_BUTTON),
+        modifier = modifier.testTag(com.nims.Tags.AuthenticationForm.TAG_AUTHENTICATE_BUTTON),
         onClick = { onAuthenticate() },
         enabled = enableAuthentication,
     ) {

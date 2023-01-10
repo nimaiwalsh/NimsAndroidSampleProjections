@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.nims.authenticationform.model.AuthenticationEvent
 import com.nims.authenticationform.model.AuthenticationState
-import com.nims.authenticationform.ui.Tags.TAG_CONTENT
-import com.nims.authenticationform.ui.Tags.TAG_PROGRESS
+import com.nims.Tags.AuthenticationForm.TAG_CONTENT
+import com.nims.Tags.AuthenticationForm.TAG_PROGRESS
 
 @Composable
 fun AuthenticationContent(

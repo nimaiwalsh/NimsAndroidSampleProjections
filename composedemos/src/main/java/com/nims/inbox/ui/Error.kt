@@ -9,9 +9,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.nims.R
+import com.nims.Tags
 
 @Composable
 fun ErrorState(
@@ -19,7 +21,9 @@ fun ErrorState(
     onTryAgain: () -> Unit
 ) {
     Column(
-        modifier = modifier.padding(16.dp),
+        modifier = modifier
+            .testTag(Tags.EmailInbox.TAG_ERROR)
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(text = stringResource(id = R.string.message_content_error))

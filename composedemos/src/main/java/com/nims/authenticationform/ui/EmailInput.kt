@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import com.nims.R
-import com.nims.authenticationform.ui.Tags.TAG_INPUT_EMAIL
+import com.nims.Tags.AuthenticationForm.TAG_INPUT_EMAIL
 
 @Composable
 fun EmailInput(modifier: Modifier, email: String?, onEmailChanged: (email: String) -> Unit, onNextClicked: () -> Unit) {

@@ -30,6 +30,9 @@ fun MainScreen(
             Button(onClick = { openScreen(Screens.EMAIL_INBOX) }) {
                 Text(text = "Email inbox")
             }
+            Button(onClick = { openScreen(Screens.MUSIC_DASHBOARD) }) {
+                Text(text = "Music Dashboard")
+            }
         }
     }
 }

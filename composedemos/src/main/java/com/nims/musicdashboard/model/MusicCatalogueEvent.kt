@@ -1,21 +1,20 @@
 package com.nims.musicdashboard.model
 
-sealed class MusicCatalogEvent {
+sealed interface MusicCatalogEvent {
 
-    object RefreshContent: MusicCatalogEvent()
+    object RefreshContent : MusicCatalogEvent
 
-    class PlayTrack(val track: Track): MusicCatalogEvent()
+    data class PlayTrack(val track: Track) : MusicCatalogEvent
 
-    class SeekTrack(val position: Float): MusicCatalogEvent()
+    data class SeekTrack(val position: Float) : MusicCatalogEvent
 
-    object RewindNowPlaying: MusicCatalogEvent()
+    object RewindNowPlaying : MusicCatalogEvent
 
-    object ToggleNowPlayingState: MusicCatalogEvent()
+    object ToggleNowPlayingState : MusicCatalogEvent
 
-    object FastForwardNowPlaying: MusicCatalogEvent()
+    object FastForwardNowPlaying : MusicCatalogEvent
 
-    class Search(val searchTerm: String): MusicCatalogEvent()
+    data class Search(val searchTerm: String) : MusicCatalogEvent
 
-    object ClearSearchQuery: MusicCatalogEvent()
-
+    object ClearSearchQuery : MusicCatalogEvent
 }

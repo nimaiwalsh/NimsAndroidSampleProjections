@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.nims.authenticationform.AuthenticationScreen
 import com.nims.home.HomeScreen
 import com.nims.inbox.InboxScreen
+import com.nims.musicdashboard.MusicScreen
 import com.nims.settings.SettingsScreen
 import com.nims.ui.theme.MaterialSettingsTheme
 
@@ -75,6 +76,11 @@ fun MainApp() {
                     composable(Screens.EMAIL_INBOX) {
                         InboxScreen()
                     }
+
+                    /** Screen showcasing music dashboard */
+                    composable(Screens.MUSIC_DASHBOARD) {
+                        MusicScreen()
+                    }
                 }
             }
         }
@@ -87,4 +93,5 @@ object Screens {
     const val AUTHENTICATION_SCREEN = "AUTHENTICATION_SCREEN"
     const val HOME_SCREEN = "HOME_SCREEN"
     const val EMAIL_INBOX = "EMAIL_INBOX"
+    const val MUSIC_DASHBOARD = "MUSIC_DASHBOARD"
 }
